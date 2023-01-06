@@ -88,14 +88,40 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+let pwdSettings = {
+  specialChars: specialCharacters,
+  numericalChars: numericCharacters,
+  lowerChars: lowerCasedCharacters,
+  upperChars: upperCasedCharacters,
+  minPassword: 10,
+  maxPassword: 64
+}
+
+let pwdLength = 0;
+
+
 // Function to prompt user for password options
 function getPasswordOptions() {
+  // Prompting for person to enter in number of characters for password
+  pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
+  
+  // Undertaking while loop until person enters between 10 & 64 chars
+  while (pwdLength < 10 || pwdLength > 64) {
+    alert("Password length must be between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword);
+    pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
+  }
+
+  // getting person to confirm password character options
+  let special = confirm("Would you like to include special characters in your password?");
+  let numerical = confirm("Would you like to include numerical characters in your password?");
+  let lowerCase = confirm("Would you like to include lowercase characters in your password?");
+  let upperCase = confirm("Would you like to include uppercase characters in your password?");
 
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // Function to generate password with user input
