@@ -113,7 +113,7 @@ function getPasswordOptions() {
   // Testing output if both number and special char added to prompt
   // alert(isNaN(pwdLength))
   // Using while loop whilst below conditions are true. Ensures person is continuously prompted until they enter a number between 10 & 64
-  while (pwdLength !== null && (isNaN(pwdLength) === true || pwdLength < 10 || pwdLength > 64 ));
+  while (pwdLength !== null && (isNaN(pwdLength) === true || pwdLength < minPassword || pwdLength > maxPassword ));
   
   // Adding alert and ending function in case user clicks cancel on prompt
   if (pwdLength === null) {
@@ -133,18 +133,23 @@ function getPasswordOptions() {
   // Using while loop whilst below conditions are false to ensure the employee at least selects one of the options
   while (specialChars === false && numericalChars === false && lowerChars === false && upperChars === false);
 
-  // concatinating existing arrays into pwdOptions array if the employee has selected it as an option
-  if (specialChars === true) {
-    pwdOptions = pwdOptions.concat(specialCharacters);
+  // function to concatinate existing arrays into pwdOptions array if the employee has selected it as an option
+  function addArr(arr) {
+    pwdOptions = pwdOptions.concat(arr);
+    return pwdOptions;
   }
-  if (numericalChars === true) {
-    pwdOptions = pwdOptions.concat(numericCharacters);
+
+  if (specialChars) {
+    addArr(specialCharacters);
   }
-  if (lowerChars === true) {
-    pwdOptions = pwdOptions.concat(lowerCasedCharacters);
+  if (numericalChars) {
+    addArr(numericCharacters);
   }
-  if (upperChars === true) {
-    pwdOptions = pwdOptions.concat(upperCasedCharacters);
+  if (lowerChars) {
+    addArr(lowerCasedCharacters);
+  }
+  if (upperChars) {
+   addArr(upperCasedCharacters);
   }
 
   // Testing output
