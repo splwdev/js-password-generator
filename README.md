@@ -166,7 +166,6 @@ Project Link: [https://github.com/splwdev/js-password-generator](https://github.
 
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 * [EDX Skills for Life Bootcamp](https://skillsforlife.edx.org/)
-* [Stack Overflow](https://stackoverflow.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
