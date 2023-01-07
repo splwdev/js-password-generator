@@ -121,19 +121,19 @@ function getPasswordOptions() {
     return;
   }
   
-  // getting person to confirm password character options
+  // getting employee to confirm password character options. continues to loop asking questions until at least 1 is picked
   do {
     specialChars = confirm("Would you like to include special characters in your password?");
     // Testing output
-    // alert(pwdSettings.specialChars);
+    // alert(specialChars);
     numericalChars = confirm("Would you like to include numerical characters in your password?");
     lowerChars = confirm("Would you like to include lowercase characters in your password?");
     upperChars = confirm("Would you like to include uppercase characters in your password?");
   }
-  // Using while loop whilst below conditions are false to ensure person at least selects one of the options
+  // Using while loop whilst below conditions are false to ensure the employee at least selects one of the options
   while (specialChars === false && numericalChars === false && lowerChars === false && upperChars === false);
 
-  // concatinating existing arrays into pwdOptions array
+  // concatinating existing arrays into pwdOptions array if the employee has selected it as an option
   if (specialChars === true) {
     pwdOptions = pwdOptions.concat(specialCharacters);
   }
@@ -147,7 +147,8 @@ function getPasswordOptions() {
     pwdOptions = pwdOptions.concat(upperCasedCharacters);
   }
 
-  console.log(pwdOptions);
+  // Testing output
+  // console.log(pwdOptions);
   return pwdOptions;
 }
 
@@ -160,8 +161,10 @@ function getRandom(arr) {
 function generatePassword() {
   getPasswordOptions();
 
+  // Initialising variable
   let password = "";
-  // console.log(pwdOptions);
+
+  // looping through calling getRandom function based on length entered by employee
   for (i = 0; i < pwdLength; i++) {
     let pwdCharOptions = getRandom(pwdOptions);
     password = password.concat(getRandom(pwdCharOptions));

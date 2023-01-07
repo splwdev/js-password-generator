@@ -1,0 +1,11 @@
+Set any global variables
+
+Ask employee the number of chacters in password and push to string
+    * if none numeric, less than 10 or greater than 64 alert employee to specifications
+    * if nothing entered end app
+
+Ask employee which password options they want
+    * If none selected continue asking until 1 is selected
+    * add arrays for selected options into new array so that the password can be generated from this new array
+
+Randomly pick character from optinons selected and add to new variable
