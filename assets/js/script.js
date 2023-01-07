@@ -93,11 +93,12 @@ let pwdSettings = {
   numericalChars: numericCharacters,
   lowerChars: lowerCasedCharacters,
   upperChars: upperCasedCharacters,
-  minPassword: 10,
-  maxPassword: 64
 }
 
-let pwdLength;
+const minPassword = 10;
+const maxPassword = 64;
+let pwdLength = 0;
+let userPassword;
 let pwdOptions = [];
 
 
@@ -105,24 +106,9 @@ let pwdOptions = [];
 function getPasswordOptions() {
   // Prompting for person to enter in number of characters for password
   do {
-    pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
-
-    // Changed from while loop to do while to minimise code footprint
-    // while (pwdLength < 10 || pwdLength > 64) {
-    // if (isNaN(pwdLength)) {
-    //   alert("Invalid character, please enter a number!!");
-    //   pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
-    // }
-    // else if (pwdLength < 10 || pwdLength > 64) {
-    //   alert("Password length must be between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword);
-    //   pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
-    // }
-    // else {
-    //   alert("Password length must be between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword);
-    //   pwdLength = prompt("Please enter a password length between " + pwdSettings.minPassword + " & " + pwdSettings.maxPassword + " characters");
-    // }
-    
-  // }
+    pwdLength = prompt("Please enter a password length between " + minPassword + " & " + maxPassword + " characters");
+    // Testing pwdLength value
+    // alert(pwdLength);
   }
   // Testing output if both number and special char added to prompt
   // alert(isNaN(pwdLength))
@@ -135,8 +121,6 @@ function getPasswordOptions() {
     return;
   }
   
-  
-
   // getting person to confirm password character options
   do {
     pwdSettings.specialChars = confirm("Would you like to include special characters in your password?");
@@ -149,12 +133,22 @@ function getPasswordOptions() {
   // Using while loop whilst below conditions are false to ensure person at least selects one of the options
   while (pwdSettings.specialChars === false && pwdSettings.numericalChars === false && pwdSettings.lowerChars === false && pwdSettings.upperChars === false);
 
-  // pushing settings to pwdOptions array
-  for (settings in pwdSettings) {
-    if (pwdSettings[settings] === true) {
-      pwdOptions.push(settings); 
-    }
+  // concatinating existing arrays into pwdOptions array
+  if (pwdSettings.specialChars) {
+    pwdOptions = pwdOptions.concat(specialCharacters);
   }
+  if (pwdSettings.numericalChars) {
+    pwdOptions = pwdOptions.concat(numericCharacters);
+  }
+  if (pwdSettings.lowerChars) {
+    pwdOptions = pwdOptions.concat(lowerCasedCharacters);
+  }
+  if (pwdSettings.upperChars) {
+    pwdOptions = pwdOptions.concat(upperCasedCharacters);
+  }
+
+  // console.log(pwdOptions);
+  return pwdOptions;
 }
 
 // Function for getting a random element from an array
@@ -165,6 +159,16 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
   getPasswordOptions();
+
+  var password = "";
+  console.log(pwdOptions);
+  for (i = 0; i < pwdLength; i++) {
+    let pwdCharOptions = getRandom(pwdOptions);
+
+    // gets a random character from the array named pwdArray
+    password = password.concat(getRandom(pwdCharOptions));
+  }
+  return password;
 }
 
 // Get references to the #generate element
