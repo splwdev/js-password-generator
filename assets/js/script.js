@@ -88,22 +88,22 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-let pwdSettings = {
-  specialChars: specialCharacters,
-  numericalChars: numericCharacters,
-  lowerChars: lowerCasedCharacters,
-  upperChars: upperCasedCharacters,
-}
 
 const minPassword = 10;
 const maxPassword = 64;
 let pwdLength = 0;
-let userPassword;
 let pwdOptions = [];
+let specialChars = false;
+let numericalChars = false;
+let lowerChars = false;
+let upperChars = false;
+
 
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+  // moving pwdOptions array into this function to clear it on new password generation
+  pwdOptions = [];
   // Prompting for person to enter in number of characters for password
   do {
     pwdLength = prompt("Please enter a password length between " + minPassword + " & " + maxPassword + " characters");
@@ -123,31 +123,31 @@ function getPasswordOptions() {
   
   // getting person to confirm password character options
   do {
-    pwdSettings.specialChars = confirm("Would you like to include special characters in your password?");
+    specialChars = confirm("Would you like to include special characters in your password?");
     // Testing output
     // alert(pwdSettings.specialChars);
-    pwdSettings.numericalChars = confirm("Would you like to include numerical characters in your password?");
-    pwdSettings.lowerChars = confirm("Would you like to include lowercase characters in your password?");
-    pwdSettings.upperChars = confirm("Would you like to include uppercase characters in your password?");
+    numericalChars = confirm("Would you like to include numerical characters in your password?");
+    lowerChars = confirm("Would you like to include lowercase characters in your password?");
+    upperChars = confirm("Would you like to include uppercase characters in your password?");
   }
   // Using while loop whilst below conditions are false to ensure person at least selects one of the options
-  while (pwdSettings.specialChars === false && pwdSettings.numericalChars === false && pwdSettings.lowerChars === false && pwdSettings.upperChars === false);
+  while (specialChars === false && numericalChars === false && lowerChars === false && upperChars === false);
 
   // concatinating existing arrays into pwdOptions array
-  if (pwdSettings.specialChars) {
+  if (specialChars === true) {
     pwdOptions = pwdOptions.concat(specialCharacters);
   }
-  if (pwdSettings.numericalChars) {
+  if (numericalChars === true) {
     pwdOptions = pwdOptions.concat(numericCharacters);
   }
-  if (pwdSettings.lowerChars) {
+  if (lowerChars === true) {
     pwdOptions = pwdOptions.concat(lowerCasedCharacters);
   }
-  if (pwdSettings.upperChars) {
+  if (upperChars === true) {
     pwdOptions = pwdOptions.concat(upperCasedCharacters);
   }
 
-  // console.log(pwdOptions);
+  console.log(pwdOptions);
   return pwdOptions;
 }
 
@@ -160,7 +160,7 @@ function getRandom(arr) {
 function generatePassword() {
   getPasswordOptions();
 
-  var password = "";
+  let password = "";
   // console.log(pwdOptions);
   for (i = 0; i < pwdLength; i++) {
     let pwdCharOptions = getRandom(pwdOptions);
