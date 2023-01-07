@@ -161,11 +161,9 @@ function generatePassword() {
   getPasswordOptions();
 
   var password = "";
-  console.log(pwdOptions);
+  // console.log(pwdOptions);
   for (i = 0; i < pwdLength; i++) {
     let pwdCharOptions = getRandom(pwdOptions);
-
-    // gets a random character from the array named pwdArray
     password = password.concat(getRandom(pwdCharOptions));
   }
   return password;
