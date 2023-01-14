@@ -106,14 +106,14 @@ function getPasswordOptions() {
   pwdOptions = [];
   // Prompting for person to enter in number of characters for password
   do {
-    pwdLength = prompt("Please enter a password length between " + minPassword + " & " + maxPassword + " characters");
+    pwdLength = parseInt(prompt("Please enter a password length between " + minPassword + " & " + maxPassword + " characters"));
     // Testing pwdLength value
     // alert(pwdLength);
   }
   // Testing output if both number and special char added to prompt
   // alert(isNaN(pwdLength))
   // Using while loop whilst below conditions are true. Ensures person is continuously prompted until they enter a number between 10 & 64
-  while (pwdLength !== null && (isNaN(pwdLength) === true || pwdLength < minPassword || pwdLength > maxPassword ));
+  while (pwdLength !== null && (isNaN(pwdLength) === true || pwdLength < minPassword || pwdLength > maxPassword));
   
   // Adding alert and ending function in case user clicks cancel on prompt
   if (pwdLength === null) {
